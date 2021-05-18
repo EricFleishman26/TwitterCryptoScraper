@@ -1,5 +1,5 @@
 import csv
-from time import sleep
+import time
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
@@ -38,14 +38,38 @@ def searchTweets(username, password, searchterm):
 
     wait = True
 
-    while wait is True: #PROBLEMATIC FUNCTION - Needs to scrape data from tweets
-
-            cards = driver.find_element_by_xpath("//div[@data-testid='tweet']")
-            card = cards[0]
-            print(card.find_element_by_xpath(".//span[contains(text(),'@')]"))
+    while wait is True:
+        try:
+            people = driver.find_element_by_link_text('People')
+            people.click()
+            time.sleep(3)
             wait = False
+        except:
+            pass
+
+    wait = True
+
+    while wait is True:
+        try:
+            driver.find_element_by_xpath("//div[@class='css-1dbjc4n r-1awozwy r-18u37iz r-1wtj0ep']").click()
+            wait = False
+        except:
+            pass
+
+    wait = True
+
+    while wait is True:
+        try:
+           tweet = driver.find_element_by_xpath("//div[@class='css-901oao r-1fmj7o5 r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-bnwqim r-qvutc0']")
+           print(tweet.text)
+           wait = False
+        except:
+            pass
 
 
-##Issues with scraping the text.
-#So far it is able to log into twitter and search but the scraping of the tweet information
-#must be implemented.
+
+    wait = True
+    while wait is True:
+        ctr = 0
+        ctr += 1
+
