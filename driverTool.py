@@ -1,4 +1,3 @@
-import csv
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
