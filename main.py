@@ -1,28 +1,21 @@
-#Needs relevant inputs for main.py
+from classes import Account
 import driverTool
 
-elontweets = []
+accounts = []
 
-elontweet = driverTool.searchTweets('username','password','elonmusk')
-ifinlistelon = elontweets.count(elontweet)
+names = ['elonmusk', 'jakepaul', 'daveportnoy']
 
-if ifinlistelon == 0:
-    elontweets.append(elontweet)
-else:
-    pass
+for name in names:
+    accounts.append(Account(name))
 
-print(elontweets)
+for account in accounts:
+    account.tweets.append(driverTool.searchTweets('username', 'password', account.name))
 
-jakepaultweets = []
-jakepaultweet = driverTool.searchTweets('username','password','jakepaul')
-ifinlistjakepaul = jakepaultweets.count(jakepaultweet)
+for account in accounts:
+    print(account.name)
+    print(account.tweets)
+    print('\n')
 
-if ifinlistjakepaul == 0:
-    jakepaultweets.append(jakepaultweet)
-else:
-    pass
-
-print(jakepaultweets)
 
 #Now Has a way of parsing various users most recent tweet, now needs certain key words
 #to determine if it has anything to do with crypto.
