@@ -1,21 +1,39 @@
-from classes import Account
 import driverTool
+import classifier
+from classes import Account
+
 
 accounts = []
+cryptotweets = []
 
-names = ['elonmusk', 'jakepaul', 'daveportnoy']
+names = []
+
+name_input = ''
+
+while name_input != 'Done':
+    name_input = str(input("Enter names of People to Search on Twitter: "))
+    if name_input == 'Done':
+        break
+    else:
+        names.append(name_input)
 
 for name in names:
     accounts.append(Account(name))
 
 for account in accounts:
-    account.tweets.append(driverTool.searchTweets('username', 'password', account.name))
+    account.tweet = driverTool.searchTweets('username', 'password', account.name)
 
 for account in accounts:
     print(account.name)
-    print(account.tweets)
+    print(account.tweet)
     print('\n')
+    type = classifier.classify(account.tweet)
+    if type is True:
+        cryptotweets.append(account)
 
-
-#Now Has a way of parsing various users most recent tweet, now needs certain key words
-#to determine if it has anything to do with crypto.
+'''
+for tweet in cryptotweets:
+    print(tweet.name)
+    print(tweet.tweet)
+    print('\n')
+'''
